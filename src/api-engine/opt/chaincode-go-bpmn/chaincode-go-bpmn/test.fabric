@@ -1,0 +1,14 @@
+[      
+    { 
+        "query": "GetAllMessages",
+        "args":   []
+    },
+    {
+        "query":"GetAllActionEvents",
+        "args": []
+    },
+    {
+        "invoke": "InitLedger",
+        "args": []
+    }
+]
