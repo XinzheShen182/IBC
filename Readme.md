@@ -1,6 +1,6 @@
 
 
-# IBC: Integrated Blockchain Collaboration Platform
+# IBC: An <u>**I**</u>ntegrated Framework Combining <u>**B**</u>lockchain with BPMN <u>**C**</u>horeography
 
 ![Framework](./Readme_img/IBC.svg)
 
