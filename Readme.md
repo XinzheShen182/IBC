@@ -4,9 +4,7 @@
 
 ![Framework](./Readme_img/IBC.svg)
 
-
-<iframe width="949" height="535" src="https://www.youtube.com/embed/e_SzCcc3ndg" title="IBC demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+[![video](./Readme_img/player.png)](https://youtu.be/e_SzCcc3ndg)
 
 ## Main Features
 
@@ -15,18 +13,24 @@
 - **BPMN choreography modeling and executing**: IBC provides a visualized BPMN choreography modeling tool, which can be used to model the business process of multi-party collaboration.
 
 
-## Project Structure
+## Project Structure 
 
 
 ```
-┌──────────┐  ┌───────────────┐
-│ BPMN     ├──┤ firefly       │  - Case to test the correctness and completeness of the system
-└──────────┘  │               │    * Real Case
-              │               │    * Corner Case
-              └───────────────┘
-                     
-┌──────────┐  ┌───────────────┐  - Connector to the Docker Engine
-│ src      ├──┤ agent         │    * Create and manage Docker containers
+┌───────────┐  ┌───────────────┐
+│ Experiment├──┤ CaseTest      │  - case to test the correctness and completeness of the system
+└───────────┘  │               │    * Real Case
+               │               │    * Corner Case
+               └────┬──────────┘
+               ┌────┴──────────┐  - data of performance test
+               │ Performance   │    * data of physical resources construction time
+               │ Test          |    * data of chaincode execution time
+               └───────────────┘    * data of chaincode generation time
+
+
+
+┌──────────┐  ┌───────────────┐  - connector to the Docker Engine
+│ src      ├──┤ agent         │    * create and manage Docker containers
 └──────────┘  │               │    
               │               │  
               └─────┬─────────┘    
