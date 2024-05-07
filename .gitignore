@@ -261,13 +261,22 @@ pgdata/
 **/AGENT/
 *venv/
 
-# !src/backend/opt/bin/*
+!src/backend/opt/bin/*
 
 # chaincode
 src/backend/opt/chaincode/
 # migrations
 src/backend/api/migrations/*_auto_*.py
+# ca_client
+src/backend/opt/ca_client/
 # chaincode bpmn.zip
 src/backend/opt/bpmn_chaincode.zip
 
 src/backend/opt/chaincode-go-bpmn/vendor
+
+CA_related/
+storage/
+migrations/
+
+bpmn_chaincode.zip
+bpmn_chaincode/

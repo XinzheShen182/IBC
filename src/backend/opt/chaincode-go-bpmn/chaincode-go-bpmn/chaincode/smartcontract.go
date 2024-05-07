@@ -810,6 +810,7 @@ func (cc *SmartContract) Message_0o8eyir_Send(ctx contractapi.TransactionContext
 	}
 
 	msg.MsgState = WAITFORCONFIRM
+	msg.MsgState = WAITFORCONFIRM
 	msg.FireflyTranID = fireflyTranID
 	msgJSON, _ := json.Marshal(msg)
 	stub.PutState("Message_0o8eyir", msgJSON)
