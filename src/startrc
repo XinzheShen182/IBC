@@ -11,8 +11,8 @@ alias export_ER='cd $WorkDir/backend && source venv/bin/activate && python manag
 
 alias export_ER_Dot='cd $WorkDir/backend && source venv/bin/activate && python manage.py graph_models -a -o er.dot'
 
-alias start_trans='cd ~/translator-springboot && mvn spring-boot:run'
-alias start_chor='cd ~/chor_js_modify && npm run dev'
+alias start_trans='cd chaincode-translator && mvn spring-boot:run'
+alias start_chor='cd chor_js && npm run dev'
 
 # start_database then wait for 3 seconds
 alias start_backend='start_database &&sleep 1&& prepare_api && start_api'
