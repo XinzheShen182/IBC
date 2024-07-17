@@ -161,14 +161,13 @@ const Translation: React.FC = () => {
       syncLeaf();
   }
 
-  const [ParticipantListmodalVisible, setParticipantListModalVisible] = useState(false);
-
+ 
+  const [ParticipantModelOpen, setParticipantModelOpen] = useState(false);
   const handleButtonClick = () => {
-    setParticipantListModalVisible(true);
+    setParticipantModelOpen(true);
   };
-  const handleModalClose = () => {
-    setParticipantListModalVisible(false);
-  };
+ 
+  
 
 
   const columns: TableProps<DataType>["columns"] = [
@@ -219,14 +218,9 @@ const Translation: React.FC = () => {
             >
               Add New Instance
             </Button>
-            <Modal
-              title="参与方列表"
-              open={ParticipantListmodalVisible}
-              onCancel={handleModalClose}
-              footer={null}
-            >
-              <ParticipantListModel bpmnId={record.id} />
-            </Modal>
+
+            <ParticipantListModel bpmnId={record.id} open={ParticipantModelOpen} setOpen={setParticipantModelOpen}/>
+            
             <Button
               type="primary"
               style={{ marginLeft: 10, background: "red" }}

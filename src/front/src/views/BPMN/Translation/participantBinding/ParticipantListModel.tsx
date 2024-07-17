@@ -4,16 +4,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "@/redux/hooks";
 import { useParticipantsData, useAvailableMembers, useBPMNBindingData } from "../Detail/hooks"
 
-const ParticipantList = ({ bpmnId }) => {
+const ParticipantList = ({ bpmnId ,open,setOpen}) => {
   const [modalActive, setModalActive] = useState(false);
-  const [validationType, setValidationType] = useState('equal');
   const [showUserSection, setShowUserSection] = useState(true);
   const [showMspSection, setShowMspSection] = useState(false);
   const [showAttributeSection, setShowAttributeSection] = useState(false);
   const currentEnvId = useAppSelector((state) => state.env.currentEnvId);
-  const [attrRows, setAttrRows] = useState([{ attrName: '', equalValue: '' }]);
   const handleParticipantClick = () => { setModalActive(true); };
-  const handleModalClose = () => { setModalActive(false); };
+  const handleAddRow = () => { const newRows = [...attrRows, { attrName: '', equalValue: '' }]; setAttrRows(newRows); };
+  const [validationType, setValidationType] = useState("相等");
   const handleValidationTypeChange = (value,evt) => {
     setValidationType(value);
     if (evt.children=="一类") {
@@ -26,15 +25,31 @@ const ParticipantList = ({ bpmnId }) => {
       setShowAttributeSection(false);
     }
   };
-  const handleAddRow = () => { const newRows = [...attrRows, { attrName: '', equalValue: '' }]; setAttrRows(newRows); };
+ 
 
 
-  const [bindings, setBindings] = useState<{}>({})
-  const [usedMember, setUsedMember] = useState<string[]>([])
+
+  const [attrRows, setAttrRows] = useState([{ attrName: '', equalValue: '' }]);
+  const [MSP,setMSP] = useState("");
+  const handleModalClose = () => {
+    setModalActive(false);
+  };
+
+  const handleParticipantListSubmit = () => {
+    
+  };
+
   const [participants, syncParticipants] = useParticipantsData(bpmnId)
   const [members, syncMembers] = useAvailableMembers(currentEnvId)
   const participants1 = participants.map((a) => { return <List.Item onClick={handleParticipantClick}>{a.name}</List.Item> })
   return (
+    <Modal
+      title="参与方列表"
+      onOk={() => {handleParticipantListSubmit()}}
+      okText="确认"
+      open={open}
+      onCancel={() => setOpen(false)}
+    >
     <div>
       <List className="participant-list">{participants1}</List>
       {modalActive && (
@@ -51,10 +66,22 @@ const ParticipantList = ({ bpmnId }) => {
             {showUserSection && (
               <div>
                 <label htmlFor="userSelect">选择用户:</label>
-                <Select id="userSelect">
-                  <Select.Option value="user1">用户 1</Select.Option>
-                  <Select.Option value="user2">用户 2</Select.Option>
-                  <Select.Option value="user3">用户 3</Select.Option>
+                <Select
+                  style={{ width: "100%" }}
+                  defaultValue=""
+                  onChange={(value) => {
+                    setMSP(value)
+                  }}
+                >
+                  {
+                    members.map((member) => {
+                      return (
+                        <Select.Option value={member.membershipName} key={member.membershipId}>
+                          {member.membershipName}
+                        </Select.Option>
+                      )
+                    })
+                  }
                 </Select>
                 <br /><br />
               </div>
@@ -67,13 +94,13 @@ const ParticipantList = ({ bpmnId }) => {
                   style={{ width: "100%" }}
                   defaultValue=""
                   onChange={(value) => {
-                    // 处理选择MSP的事件
+                    setMSP(value)
                   }}
                 >
                   {
                     members.map((member) => {
                       return (
-                        <Select.Option value={member.membershipId} key={member.membershipId}>
+                        <Select.Option value={member.membershipName} key={member.membershipId}>
                           {member.membershipName}
                         </Select.Option>
                       )
@@ -111,6 +138,7 @@ const ParticipantList = ({ bpmnId }) => {
       </Card>
       )}
     </div>
+  </Modal>
   );
 };
 

@@ -176,3 +176,24 @@ export const getFireflyWithMSP = async (msp) => {
         return null;
     }
 }
+
+//TODO:
+export const Participanting = async (bpmnId: string, participantId: string, msp: string,isMulti:boolean,attributes:{},multiMaximun:number,multiMinimun:number,x509:string) => {
+    try {
+        const response = await api.post(`/bpmns/${bpmnId}/Participanting`, {
+            bpmnId: bpmnId,
+            participantId: participantId,
+            msp:msp,
+            isMulti:isMulti,
+            attributes:attributes,
+            multiMaximun:multiMaximun,
+            multiMinimun:multiMinimun,
+            x509:x509
+        })
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
